@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace fileUpload
+{
+    public partial class fileUpload : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lblUpload_Click(object sender, EventArgs e)
+        {
+            if (FileUpload1.HasFile)
+            {
+                string fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName);
+                if (fileExtension.ToLower() != ".png" && fileExtension.ToLower() != ".jpg")
+                {
+                    lblMessage.Text = "Only image files are available";
+                }
+                else
+                {
+                    FileUpload1.SaveAs(Server.MapPath("~/Uploads/") + FileUpload1.FileName);
+                    lblMessage.Text = "File Uploaded";
+                    
+                }
+            }
+            else
+                lblMessage.Text = "Please select the file to upload!!!";
+        }
+        
+
+    }
+}
